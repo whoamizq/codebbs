@@ -9,5 +9,6 @@ public class CodebbsApplication {
     public static void main(String[] args) {
         SpringApplication.run(CodebbsApplication.class, args);
     }
+    
 
 }
