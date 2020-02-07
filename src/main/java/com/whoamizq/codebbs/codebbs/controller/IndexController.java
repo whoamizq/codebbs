@@ -18,14 +18,16 @@ public class IndexController {
     public String index(HttpServletRequest request){
         Cookie[] cookies = request.getCookies();
         //访问首页时，查询是否有token，以此来判断展示个人信息
-        for (Cookie cookie :cookies ) {
-            if (cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if (user!=null){
-                    request.getSession().setAttribute("user",user);
+        if (cookies!=null){
+            for (Cookie cookie :cookies ) {
+                if (cookie.getName().equals("token")){
+                    String token = cookie.getValue();
+                    User user = userMapper.findByToken(token);
+                    if (user!=null){
+                        request.getSession().setAttribute("user",user);
+                    }
+                    break;
                 }
-                break;
             }
         }
         return "index";
