@@ -13,7 +13,7 @@ body{
 .media-object{
     width: 38px;
     height: 38px;
-    padding-right: 10px;
+    margin-right: 10px;
     background-color: #00aaaa;
 }
 .text-desc{
