@@ -13,7 +13,7 @@ body{
 .media-object{
     width: 38px;
     height: 38px;
-    margin-right: 10px;
+    margin-right: 5px;
     background-color: #00aaaa;
 }
 .text-desc{
@@ -23,4 +23,8 @@ body{
 }
 .profile .section{
     margin-top: 15px;
+}
+.codebbs-menu{
+    font-size: 13px;
+    color: #999;
 }
