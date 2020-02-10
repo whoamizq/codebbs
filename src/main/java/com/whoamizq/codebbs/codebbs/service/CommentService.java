@@ -1,15 +1,21 @@
 package com.whoamizq.codebbs.codebbs.service;
 
+import com.whoamizq.codebbs.codebbs.dto.CommentDTO;
 import com.whoamizq.codebbs.codebbs.enums.CommentTypeEnum;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
 import com.whoamizq.codebbs.codebbs.mapper.*;
-import com.whoamizq.codebbs.codebbs.model.Comment;
-import com.whoamizq.codebbs.codebbs.model.Question;
-import com.whoamizq.codebbs.codebbs.model.User;
+import com.whoamizq.codebbs.codebbs.model.*;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentService {
@@ -31,7 +37,12 @@ public class CommentService {
     @Autowired
     private NotificationMapper notificationMapper;
 
-
+    /**
+     * 评论回复功能
+     * 实现回复问题功能
+     * @param comment
+     * @param commentator
+     */
     @Transactional
     public void  insert(Comment comment, User commentator){
         if (comment.getParentId() == null || comment.getParentId() == 0){
@@ -77,5 +88,43 @@ public class CommentService {
             // 创建通知
 //            createNotify(comment, question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
         }
+    }
+
+    /**
+     * 实现回复列表显示功能
+     * @param id
+     * @return
+     */
+    public List<CommentDTO> listByQuestionId(Long id) {
+        CommentExample commentExample = new CommentExample();
+        commentExample.createCriteria()
+                .andParentIdEqualTo(id)
+                .andTypeEqualTo(CommentTypeEnum.QUESTION.getType());
+        commentExample.setOrderByClause("gmt_create desc");
+        List<Comment> comments = commentMapper.selectByExample(commentExample);
+        if (comments.size() == 0){
+            return new ArrayList<>();
+        }
+        //使用lamda，获取评论用户，去掉重复的用户,使用Java8新特性
+        Set<Long> commentators = comments.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
+        List<Long> userIds = new ArrayList<>();
+        userIds.addAll(commentators);
+
+        //获取评论用户并转换为Map
+        UserExample userExample = new UserExample();
+        userExample.createCriteria()
+                .andIdIn(userIds);
+        List<User> users = userMapper.selectByExample(userExample);
+        Map<Long, User> userMap = users.stream().collect(Collectors.toMap(user -> user.getId(), user -> user));
+
+        //将comment转换为commentDTO
+        List<CommentDTO> commentDTOS = comments.stream().map(comment -> {
+            CommentDTO commentDTO = new CommentDTO();
+            BeanUtils.copyProperties(comment,commentDTO);
+            commentDTO.setUser(userMap.get(comment.getCommentator()));
+            return commentDTO;
+        }).collect(Collectors.toList());
+        return commentDTOS;
+
     }
 }

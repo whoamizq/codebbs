@@ -15,7 +15,9 @@
 <div th:insert="navigation :: nav"></div>
 <div class="container-fluid main profile">
     <div class="row">
+        <!--左边主要内容-->
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <!--标题正文-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4 class="question-title"><span th:text="${question.title}"></span></h4>
                 <span class="text-desc">
@@ -24,15 +26,15 @@
                     阅读数： <span th:text="${question.viewCount}"></span>
                 </span>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12"/>
-                <!--内容-->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    <textarea  th:text="${question.description}"></textarea>
+                <!--问题内容-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="question-view">
+                    <textarea style="display:none;"  th:text="${question.description}"></textarea>
                 </div>
-<!--                <script type="text/javascript">-->
-<!--                    $(function () {-->
-<!--                        editormd.markdownToHTML("question-view", {});-->
-<!--                    });-->
-<!--                </script>-->
+                <script type="text/javascript">
+                    $(function () {
+                        editormd.markdownToHTML("question-view", {});
+                    });
+                </script>
 
                 <!--标签-->
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

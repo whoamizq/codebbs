@@ -10,7 +10,7 @@ function post() {
 
 function comment2target(targetId, type, content) {
     if (!content) {
-        alert("不能回复空内容~~~");
+        alert("内容是空的哦，请输入内容~~~");
         return;
     }
 
