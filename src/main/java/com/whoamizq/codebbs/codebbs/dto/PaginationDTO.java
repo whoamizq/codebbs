@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 //分页
 @Data
-public class PaginationDTO {
-    private List<QuestionDTO> questions;
+public class PaginationDTO<T> {
+    private List<T> data;
     private boolean showPrevious;//是否有向前按钮
     private boolean showFirstPage;
     private boolean showNext;
@@ -20,7 +20,7 @@ public class PaginationDTO {
         this.page = page;
         this.totalPage = totalPage;
 
-        //判断显示页码，最多3个页码
+        //判断显示页码，最多7个页码
         pages.add(page);
         for (int i=1;i<=3;i++){
             if (page-i>0){

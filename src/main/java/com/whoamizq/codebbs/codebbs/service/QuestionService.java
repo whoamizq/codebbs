@@ -2,7 +2,8 @@ package com.whoamizq.codebbs.codebbs.service;
 
 import com.whoamizq.codebbs.codebbs.dto.PaginationDTO;
 import com.whoamizq.codebbs.codebbs.dto.QuestionDTO;
-import com.whoamizq.codebbs.codebbs.dto.QuestionQueryDTO;
+import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
+import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
 import com.whoamizq.codebbs.codebbs.mapper.QuestionExtMapper;
 import com.whoamizq.codebbs.codebbs.mapper.QuestionMapper;
 import com.whoamizq.codebbs.codebbs.mapper.UserMapper;
@@ -61,13 +62,14 @@ public class QuestionService {
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }
 
     public PaginationDTO list(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalPage;
+
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria()
                 .andCreatorEqualTo(userId);
@@ -78,41 +80,42 @@ public class QuestionService {
         } else {
             totalPage = totalCount / size + 1;
         }
+
         if (page < 1) {
             page = 1;
         }
         if (page > totalPage) {
             page = totalPage;
         }
+
         paginationDTO.setPagination(totalPage, page);
+
         //size*(page-1)
         Integer offset = size * (page - 1);
-        if (offset<0){
-            offset = 1;
-        }
         QuestionExample example = new QuestionExample();
         example.createCriteria()
                 .andCreatorEqualTo(userId);
         List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
-        for (Question question : questions){
+        for (Question question : questions) {
             User user = userMapper.selectByPrimaryKey(question.getCreator());
             QuestionDTO questionDTO = new QuestionDTO();
-            BeanUtils.copyProperties(question,questionDTO);
+            BeanUtils.copyProperties(question, questionDTO);
             questionDTO.setUser(user);
             questionDTOList.add(questionDTO);
         }
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }
 
     public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
-
+        if (question == null) {
+            throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+        }
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
         User user = userMapper.selectByPrimaryKey(question.getCreator());
-
         questionDTO.setUser(user);
         return questionDTO;
     }
@@ -137,6 +140,16 @@ public class QuestionService {
             example.createCriteria()
                     .andIdEqualTo(question.getId());
             int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if (updated != 1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
         }
+    }
+
+    public void incview(Long id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
     }
 }
