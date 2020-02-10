@@ -1,3 +1,6 @@
+/**
+ * Created by codedrinker on 2019/6/1.
+ */
 
 /**
  * 提交回复
@@ -10,7 +13,7 @@ function post() {
 
 function comment2target(targetId, type, content) {
     if (!content) {
-        alert("内容是空的哦，请输入内容~~~");
+        alert("不能回复空内容~~~");
         return;
     }
 
@@ -79,7 +82,7 @@ function collapseComments(e) {
                         "class": "media-object img-rounded",
                         "src": comment.user.avatarUrl
                     }));
-
+debugger;
                     var mediaBodyElement = $("<div/>", {
                         "class": "media-body"
                     }).append($("<h5/>", {

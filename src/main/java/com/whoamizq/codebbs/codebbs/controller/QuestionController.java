@@ -2,9 +2,9 @@ package com.whoamizq.codebbs.codebbs.controller;
 
 import com.whoamizq.codebbs.codebbs.dto.CommentDTO;
 import com.whoamizq.codebbs.codebbs.dto.QuestionDTO;
+import com.whoamizq.codebbs.codebbs.enums.CommentTypeEnum;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
-import com.whoamizq.codebbs.codebbs.model.Question;
 import com.whoamizq.codebbs.codebbs.service.CommentService;
 import com.whoamizq.codebbs.codebbs.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class QuestionController {
             throw new CustomizeException(CustomizeErrorCode.INVALID_INPUT);
         }
         QuestionDTO questionDTO = questionService.getById(questionId);
-        List<CommentDTO> comments = commentService.listByQuestionId(questionId);
+        List<CommentDTO> comments = commentService.listByTargetId(questionId, CommentTypeEnum.QUESTION);
         //浏览数/阅读数的增加
         questionService.incview(questionId);
         model.addAttribute("question",questionDTO);

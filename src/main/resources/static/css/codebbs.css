@@ -52,7 +52,7 @@ body{
     margin-bottom: 15px;
     border-bottom: 1px solid #eee;
 }
-
+/*二级评论*/
 .sub-comments {
     border-radius: 5px;
     margin-top: 10px;
@@ -63,7 +63,6 @@ body{
 .sub-comments .btn {
     margin: 10px 0;
 }
-
 .comment-sp {
     margin-top: 0;
 }
