@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
     <link rel="stylesheet" href="/css/codebbs.css">
+    <script src="/js/codebbs.js"></script>
 </head>
 <body>
 <!--导航栏-->
 <div th:insert="navigation :: nav"></div>
+<!--主要内容-->
 <div class="container-fluid main">
     <div class="row">
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -22,18 +24,46 @@
                 <div class="form-group">
                     <label for="title">问题标题(请简单描述)：</label>
                     <input type="text" class="form-control" th:value="${title}"
-                           id="title" name="title" placeholder="问题标题...">
+                           id="title" name="title" placeholder="问题标题..." autocomplete="off">
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="question-editor">
                     <label for="description">问题补充(必填，请参照右侧提示)：</label>
-                    <textarea name="description" id="description" th:text="${description}"
+                    <textarea name="description" id="description"
+                              th:text="${description}"
                               class="form-control" cols="30" rows="10"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="title">添加标签：</label>
+                    <label for="tag">添加标签：</label>
                     <input type="text" class="form-control" id="tag"
-                           th:value="${tag}" name="tag" placeholder="输入标签，以，分隔...">
+                           th:value="${tag}" name="tag" placeholder="输入标签，以，分隔..."
+                           autocomplete="off" onclick="showSelectTag()">
+                    <!--推荐标签-->
+                    <div id="select-tag" class="publish-tag-tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <!--默认选中第一个-->
+                            <li role="presentation" th:each="selectCategory,selectCategoryStat: ${tags}"
+                                th:class="${selectCategoryStat.first ? 'active':''}">
+                                <a th:href="${'#'+selectCategory.categoryName}" aria-controls="home" role="tab"
+                                   data-toggle="tab" th:text="${selectCategory.categoryName}"></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div role="tabpanel" th:id="${selectCategory.categoryName}"
+                                 th:each="selectCategory: ${tags}"
+                                 th:class="${selectCategoryStat.first ? 'active tab-pane':'tab-pane'}">
+                                <span>
+                                    <span th:each="selectTag: ${selectCategory.tags}">
+                                    <span class="codebbs-tag" onclick="selectTag(this)"
+                                          th:data-tag="${selectTag}"
+                                          th:text="${' '+selectTag}">
+                                    </span>
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <!--错误信息提示以及发布按钮-->
                 <div class="container-fluid main">
                     <div class="row">
                         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
@@ -50,6 +80,7 @@
                 </div>
             </form>
         </div>
+        <!--右边提示栏-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
             <h3>问题发起指南</h3>
             • 问题标题: 请用精简的语言描述您发布的问题，不超过25字 <br>

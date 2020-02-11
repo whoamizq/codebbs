@@ -6,7 +6,6 @@ public enum NotificationTypeEnum {
     private int type;
     private String name;
 
-
     public int getType() {
         return type;
     }
@@ -20,6 +19,11 @@ public enum NotificationTypeEnum {
         this.name = name;
     }
 
+    /**
+     * 设置通知类型
+     * @param type
+     * @return
+     */
     public static String nameOfType(int type) {
         for (NotificationTypeEnum notificationTypeEnum : NotificationTypeEnum.values()) {
             if (notificationTypeEnum.getType() == type) {

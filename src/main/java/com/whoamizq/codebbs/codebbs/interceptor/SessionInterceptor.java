@@ -3,6 +3,7 @@ package com.whoamizq.codebbs.codebbs.interceptor;
 import com.whoamizq.codebbs.codebbs.mapper.UserMapper;
 import com.whoamizq.codebbs.codebbs.model.User;
 import com.whoamizq.codebbs.codebbs.model.UserExample;
+import com.whoamizq.codebbs.codebbs.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -21,6 +22,9 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     private String redirectUri;
 
+    @Autowired
+    private NotificationService notificationService;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
@@ -38,6 +42,9 @@ public class SessionInterceptor implements HandlerInterceptor {
                     if (users.size() != 0){
                         HttpSession session = request.getSession();
                         session.setAttribute("user", users.get(0));
+                        //设置通知条数
+                        Long unreadCount = notificationService.unreadCount(users.get(0).getId());
+                        session.setAttribute("unreadCount", unreadCount);
                     }
                     break;
                 }

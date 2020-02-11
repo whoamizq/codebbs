@@ -2,6 +2,8 @@ package com.whoamizq.codebbs.codebbs.service;
 
 import com.whoamizq.codebbs.codebbs.dto.CommentDTO;
 import com.whoamizq.codebbs.codebbs.enums.CommentTypeEnum;
+import com.whoamizq.codebbs.codebbs.enums.NotificationStatusEnum;
+import com.whoamizq.codebbs.codebbs.enums.NotificationTypeEnum;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
 import com.whoamizq.codebbs.codebbs.mapper.*;
@@ -71,9 +73,10 @@ public class CommentService {
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
             commentExtMapper.incCommentCount(parentComment);
-//
+
 //            // 创建通知
-//            createNotify(comment, dbComment.getCommentator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
+            createNotify(comment, dbComment.getCommentator(), commentator.getName(),
+                    question.getTitle(), NotificationTypeEnum.REPLY_COMMENT, question.getId());
         }else {
             // 回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -86,9 +89,43 @@ public class CommentService {
             questionExtMapper.incCommentCount(question);
 
             // 创建通知
-//            createNotify(comment, question.getCreator(), commentator.getName(), question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
+            createNotify(comment, question.getCreator(), commentator.getName(),
+                    question.getTitle(), NotificationTypeEnum.REPLY_QUESTION, question.getId());
         }
     }
+
+    /**
+     * 通知消息的创建
+     * @param comment
+     * @param receiver
+     * @param notifierName
+     * @param outerTitle
+     * @param notificationType
+     * @param outerId
+     */
+    private void createNotify(Comment comment, Long receiver, String notifierName,
+                              String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+        /**
+         * 注意不能直接使用comment.getCommentator,因为其获取的值为地址，
+         * 需要通过comment.getCommentator().hashCode()获取到实际值才能进行判断，
+         * 若直接进行判断，下面语句不会执行,
+         * 并且只能用equals判断，目前原因还没查出
+         */
+        if (receiver.equals(comment.getCommentator().hashCode())) {
+            return;
+        }
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(notificationType.getType());
+        notification.setOuterid(outerId);
+        notification.setNotifier(comment.getCommentator());
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setReceiver(receiver);
+        notification.setNotifierName(notifierName);
+        notification.setOuterTitle(outerTitle);
+        notificationMapper.insert(notification);
+    }
+
 
     /**
      * 实现回复列表显示功能

@@ -1,6 +1,4 @@
-/**
- * Created by codedrinker on 2019/6/1.
- */
+
 
 /**
  * 提交回复
@@ -74,6 +72,7 @@ function collapseComments(e) {
             e.setAttribute("data-collapse", "in");
             e.classList.add("active");
         } else {
+
             $.getJSON("/comment/" + id, function (data) {
                 $.each(data.data.reverse(), function (index, comment) {
                     var mediaLeftElement = $("<div/>", {
@@ -82,7 +81,8 @@ function collapseComments(e) {
                         "class": "media-object img-rounded",
                         "src": comment.user.avatarUrl
                     }));
-debugger;
+// debugger;
+                    //拼接样式
                     var mediaBodyElement = $("<div/>", {
                         "class": "media-body"
                     }).append($("<h5/>", {

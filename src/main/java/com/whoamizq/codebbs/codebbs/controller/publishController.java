@@ -1,9 +1,11 @@
 package com.whoamizq.codebbs.codebbs.controller;
 
+import com.whoamizq.codebbs.codebbs.cache.TagCache;
 import com.whoamizq.codebbs.codebbs.dto.QuestionDTO;
 import com.whoamizq.codebbs.codebbs.model.Question;
 import com.whoamizq.codebbs.codebbs.model.User;
 import com.whoamizq.codebbs.codebbs.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,8 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class publishController {
 
-
-
     @Autowired
     private QuestionService questionService;
 
@@ -29,11 +29,13 @@ public class publishController {
         model.addAttribute("description",question.getDescription());
         model.addAttribute("tag",question.getTag());
         model.addAttribute("id",question.getId());
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
     @GetMapping("/publish")
-    public String publish(){
+    public String publish(Model model){
+        model.addAttribute("tags",TagCache.get());
         return "publish";
     }
 
@@ -47,7 +49,8 @@ public class publishController {
         model.addAttribute("title",title);
         model.addAttribute("description",description);
         model.addAttribute("tag",tag);
-
+        model.addAttribute("tags",TagCache.get());
+        //校验输入是否为空
         if (title == null || title.equals("")) {
             model.addAttribute("error","标题不能为空");
             return "publish";
@@ -60,7 +63,14 @@ public class publishController {
             model.addAttribute("error","请至少填写一个标签");
             return "publish";
         }
+        //校验标签的合法性
+        String invalid = TagCache.filterInvalid(tag);
+        if (StringUtils.isNotBlank(invalid)){
+            model.addAttribute("error","输入非法标签"+invalid);
+            return "publish";
+        }
 
+        //校验登录
         User user = (User)request.getSession().getAttribute("user");
         if (user==null){
             model.addAttribute("error","用户未登录");
