@@ -106,14 +106,12 @@ public class CommentService {
     private void createNotify(Comment comment, Long receiver, String notifierName,
                               String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
         /**
-         * 注意不能直接使用comment.getCommentator,因为其获取的值为地址，
-         * 需要通过comment.getCommentator().hashCode()获取到实际值才能进行判断，
-         * 若直接进行判断，下面语句不会执行,
-         * 并且只能用equals判断，目前原因还没查出
+         * 如果是自己给自己评论不去创建通知
          */
-        if (receiver.equals(comment.getCommentator().hashCode())) {
+        if (receiver.equals(comment.getCommentator())) {
             return;
         }
+        //否则进行通知
         Notification notification = new Notification();
         notification.setGmtCreate(System.currentTimeMillis());
         notification.setType(notificationType.getType());

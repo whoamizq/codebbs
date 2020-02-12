@@ -80,6 +80,13 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.9</version>
         </dependency>
+        <!--对象存储UFile，UCloud-->
+        <dependency>
+            <groupId>cn.ucloud.ufile</groupId>
+            <artifactId>ufile-client-java</artifactId>
+            <version>2.4.1</version>
+
+        </dependency>
 
         <!--test 测试工具启动器-->
         <dependency>
