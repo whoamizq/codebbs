@@ -1,5 +1,6 @@
 package com.whoamizq.codebbs.codebbs.mapper;
 
+import com.whoamizq.codebbs.codebbs.dto.QuestionQueryDTO;
 import com.whoamizq.codebbs.codebbs.model.Question;
 import com.whoamizq.codebbs.codebbs.model.QuestionExample;
 import java.util.List;
@@ -134,4 +135,5 @@ public interface QuestionMapper {
      * @mbggenerated Sun Feb 09 16:09:20 CST 2020
      */
     int updateByPrimaryKey(Question record);
+
 }

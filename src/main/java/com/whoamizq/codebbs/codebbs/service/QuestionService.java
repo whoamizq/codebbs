@@ -3,6 +3,7 @@ package com.whoamizq.codebbs.codebbs.service;
 import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.whoamizq.codebbs.codebbs.dto.PaginationDTO;
 import com.whoamizq.codebbs.codebbs.dto.QuestionDTO;
+import com.whoamizq.codebbs.codebbs.dto.QuestionQueryDTO;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
 import com.whoamizq.codebbs.codebbs.mapper.QuestionExtMapper;
@@ -31,12 +32,26 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(Integer page, Integer size,String search,
+                              String tag,String sort) {
+        if (StringUtils.isNotBlank(search)){
+            String[] tags = StringUtils.split(search," ");
+            search = Arrays
+                    .stream(tags)
+                    .filter(StringUtils::isNotBlank)
+                    .map(t -> t.replace("+","").replace("*","").replace("?",""))
+                    .filter(StringUtils::isNotBlank)
+                    .collect(Collectors.joining("|"));
+        }
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalPage;
-//        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        if (StringUtils.isNotBlank(tag)){
 
-        Integer totalCount = (Integer) questionMapper.countByExample(new QuestionExample());
+        }
+
+        Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
 
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -49,14 +64,14 @@ public class QuestionService {
         if (page > totalPage) {
             page = totalPage;
         }
+
+
         paginationDTO.setPagination(totalPage, page);
         //size*(page-1)
         Integer offset = page < 1 ? 0 : size * (page - 1);
-//        questionQueryDTO.setSize(size);
-//        questionQueryDTO.setPage(offset);
-//        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
-
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
+        questionQueryDTO.setSize(size);
+        questionQueryDTO.setPage(offset);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
 
         for (Question question : questions){
@@ -96,6 +111,9 @@ public class QuestionService {
 
         //size*(page-1)
         Integer offset = size * (page - 1);
+        if (offset<1){
+            offset = 1;
+        }
         QuestionExample example = new QuestionExample();
         example.createCriteria()
                 .andCreatorEqualTo(userId);
