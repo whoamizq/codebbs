@@ -22,7 +22,8 @@ public class TagCache {
         TagDTO framework = new TagDTO();
         framework.setCategoryName("平台框架");
         framework.setTags(Arrays.asList("laravel", "spring", "express", "django", "flask",
-                "yii", "ruby-on-rails", "tornado", "koa", "struts"));
+                "yii", "ruby-on-rails", "tornado", "koa", "struts","spring","springboot",
+                "mybatis","vue","springmvc","shiro"));
         tagDTOS.add(framework);
 
         TagDTO server = new TagDTO();
@@ -41,7 +42,7 @@ public class TagCache {
         tool.setCategoryName("开发工具");
         tool.setTags(Arrays.asList("git", "github", "visual-studio-code", "vim", "sublime-text",
                 "xcode intellij-idea", "eclipse", "maven", "ide", "svn", "visual-studio",
-                "atom emacs", "textmate", "hg"));
+                "atom emacs", "textmate", "hg","idea"));
         tagDTOS.add(tool);
         return tagDTOS;
     }

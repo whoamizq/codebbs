@@ -17,6 +17,8 @@
     <properties>
         <java.version>1.8</java.version>
     </properties>
+
+
     <!--springBoot 启动器-->
     <dependencies>
         <dependency>
@@ -111,20 +113,15 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.0.7</version>
                 <configuration>
-                    <url>jdbc:mysql://localhost:3306/codebbs</url>
-                    <user>root</user>
-                    <password>root8</password>
+                    <url>${db.url}</url>
+                    <user>${db.user}</user>
+                    <password>${db.password}</password>
                 </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
                         <version>8.0.11</version>
-                    </dependency>
-                    <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.200</version>
                     </dependency>
                 </dependencies>
             </plugin>
