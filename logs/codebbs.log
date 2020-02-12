@@ -100,3 +100,87 @@
 2020-02-12 21:07:39.160  INFO 17592 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
 2020-02-12 21:07:39.161  INFO 17592 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
 2020-02-12 21:07:39.175  INFO 17592 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 14 ms
+2020-02-12 21:34:34.276  INFO 16044 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Starting CodebbsApplication on DESKTOP-E5P25TA with PID 16044 (C:\STS_SpringBoot\codebbs\target\classes started by whoami in C:\STS_SpringBoot\codebbs)
+2020-02-12 21:34:34.279  INFO 16044 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : No active profile set, falling back to default profiles: default
+2020-02-12 21:34:34.378  INFO 16044 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-12 21:34:34.379  INFO 16044 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-12 21:34:36.529  INFO 16044 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-12 21:34:36.542  INFO 16044 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-12 21:34:36.542  INFO 16044 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-12 21:34:36.662  INFO 16044 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-12 21:34:36.663  INFO 16044 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2284 ms
+2020-02-12 21:34:36.717  INFO 16044 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-12 21:34:36.719  WARN 16044 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2020-02-12 21:34:37.689  INFO 16044 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-12 21:34:37.697  INFO 16044 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://47.100.43.10:3306/matan'
+2020-02-12 21:34:38.490  INFO 16044 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-12 21:34:38.577  INFO 16044 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-12 21:34:39.358  INFO 16044 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-12 21:34:39.596  INFO 16044 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-12 21:34:39.609  INFO 16044 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Started CodebbsApplication in 6.003 seconds (JVM running for 8.026)
+2020-02-12 21:35:52.496  INFO 16044 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-12 21:35:52.496  INFO 16044 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-12 21:35:52.510  INFO 16044 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
+2020-02-12 21:37:02.270  INFO 8740 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Starting CodebbsApplication on DESKTOP-E5P25TA with PID 8740 (C:\STS_SpringBoot\codebbs\target\classes started by whoami in C:\STS_SpringBoot\codebbs)
+2020-02-12 21:37:02.273  INFO 8740 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : No active profile set, falling back to default profiles: default
+2020-02-12 21:37:02.346  INFO 8740 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-12 21:37:02.346  INFO 8740 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-12 21:37:04.232  INFO 8740 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-12 21:37:04.242  INFO 8740 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-12 21:37:04.243  INFO 8740 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-12 21:37:04.360  INFO 8740 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-12 21:37:04.361  INFO 8740 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2015 ms
+2020-02-12 21:37:04.405  INFO 8740 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-12 21:37:04.407  WARN 8740 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2020-02-12 21:37:06.545  INFO 8740 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-12 21:37:06.550  INFO 8740 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/codebbs'
+2020-02-12 21:37:07.184  INFO 8740 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-12 21:37:07.254  INFO 8740 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-12 21:37:07.830  INFO 8740 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-12 21:37:07.882  INFO 8740 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-12 21:37:07.886  INFO 8740 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Started CodebbsApplication in 6.079 seconds (JVM running for 7.791)
+2020-02-12 21:37:23.915  INFO 8740 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-12 21:37:23.917  INFO 8740 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-12 21:37:23.929  INFO 8740 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2020-02-12 21:45:21.100  INFO 28408 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Starting CodebbsApplication on DESKTOP-E5P25TA with PID 28408 (C:\STS_SpringBoot\codebbs\target\classes started by whoami in C:\STS_SpringBoot\codebbs)
+2020-02-12 21:45:21.106  INFO 28408 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : No active profile set, falling back to default profiles: default
+2020-02-12 21:45:21.168  INFO 28408 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-12 21:45:21.168  INFO 28408 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-12 21:45:23.210  INFO 28408 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-12 21:45:23.219  INFO 28408 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-12 21:45:23.220  INFO 28408 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-12 21:45:23.341  INFO 28408 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-12 21:45:23.342  INFO 28408 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2172 ms
+2020-02-12 21:45:23.385  INFO 28408 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-12 21:45:23.387  WARN 28408 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2020-02-12 21:45:24.590  INFO 28408 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-12 21:45:24.596  INFO 28408 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/codebbs'
+2020-02-12 21:45:25.326  INFO 28408 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-12 21:45:25.395  INFO 28408 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-12 21:45:25.992  INFO 28408 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-12 21:45:26.047  INFO 28408 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-12 21:45:26.052  INFO 28408 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Started CodebbsApplication in 5.459 seconds (JVM running for 7.19)
+2020-02-12 21:45:42.384  INFO 28408 --- [http-nio-80-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-12 21:45:42.385  INFO 28408 --- [http-nio-80-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-12 21:45:42.411  INFO 28408 --- [http-nio-80-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 25 ms
+2020-02-12 21:58:39.562  INFO 27900 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Starting CodebbsApplication on DESKTOP-E5P25TA with PID 27900 (C:\STS_SpringBoot\codebbs\target\classes started by whoami in C:\STS_SpringBoot\codebbs)
+2020-02-12 21:58:39.565  INFO 27900 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : No active profile set, falling back to default profiles: default
+2020-02-12 21:58:39.639  INFO 27900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2020-02-12 21:58:39.639  INFO 27900 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2020-02-12 21:58:41.247  INFO 27900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2020-02-12 21:58:41.258  INFO 27900 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-02-12 21:58:41.259  INFO 27900 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.30]
+2020-02-12 21:58:41.387  INFO 27900 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-02-12 21:58:41.387  INFO 27900 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1748 ms
+2020-02-12 21:58:41.437  INFO 27900 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2020-02-12 21:58:41.439  WARN 27900 --- [restartedMain] com.zaxxer.hikari.util.DriverDataSource  : Registered driver with driverClassName=com.mysql.jdbc.Driver was not found, trying direct instantiation.
+2020-02-12 21:58:42.619  INFO 27900 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2020-02-12 21:58:42.626  INFO 27900 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:mysql://localhost:3306/codebbs'
+2020-02-12 21:58:43.245  INFO 27900 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-02-12 21:58:43.321  INFO 27900 --- [restartedMain] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2020-02-12 21:58:44.229  INFO 27900 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2020-02-12 21:58:44.280  INFO 27900 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2020-02-12 21:58:44.284  INFO 27900 --- [restartedMain] c.w.codebbs.codebbs.CodebbsApplication   : Started CodebbsApplication in 5.298 seconds (JVM running for 7.083)
+2020-02-12 21:58:50.025  INFO 27900 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-02-12 21:58:50.026  INFO 27900 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2020-02-12 21:58:50.040  INFO 27900 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 13 ms
