@@ -32,6 +32,15 @@ public class QuestionService {
     @Autowired
     private QuestionExtMapper questionExtMapper;
 
+    /**
+     * 首页展示
+     * @param page
+     * @param size
+     * @param search
+     * @param tag
+     * @param sort
+     * @return
+     */
     public PaginationDTO list(Integer page, Integer size,String search,
                               String tag,String sort) {
         if (StringUtils.isNotBlank(search)){
@@ -85,6 +94,13 @@ public class QuestionService {
         return paginationDTO;
     }
 
+    /**
+     * 我的问题
+     * @param userId
+     * @param page
+     * @param size
+     * @return
+     */
     public PaginationDTO list(Long userId, Integer page, Integer size) {
         PaginationDTO paginationDTO = new PaginationDTO();
         Integer totalPage;
@@ -110,10 +126,8 @@ public class QuestionService {
         paginationDTO.setPagination(totalPage, page);
 
         //size*(page-1)
-        Integer offset = size * (page - 1);
-        if (offset<1){
-            offset = 1;
-        }
+        Integer offset = page < 1 ? 0 : size * (page - 1);
+
         QuestionExample example = new QuestionExample();
         example.createCriteria()
                 .andCreatorEqualTo(userId);
