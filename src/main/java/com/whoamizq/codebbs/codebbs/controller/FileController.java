@@ -11,6 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @Slf4j
@@ -20,8 +21,9 @@ public class FileController {
 
     @RequestMapping("/file/upload")
     @ResponseBody
-    public FileDTO upload(HttpServletRequest request){
+    public FileDTO upload(HttpServletRequest request, HttpServletResponse response){
         MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+        response.setHeader( "Content-Type" , "text/html" );
         MultipartFile file = multipartHttpServletRequest.getFile("editormd-image-file");
         try {
             String filename = uCloudProvider.upload(file.getInputStream(), file.getContentType(), file.getOriginalFilename());

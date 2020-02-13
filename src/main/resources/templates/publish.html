@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>whoami码坛--发布话题</title>
+    <title>whoami码谈--发布话题</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
@@ -44,11 +44,13 @@
                             height: 350,
                             path: "/js/lib/",
                             delay: 0,
-                            watch: false,
+                            emoji:true,
+                            syncScrolling : "single",
                             placeholder: "请输入问题描述",
                             imageUpload: true,
                             imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
-                            imageUploadURL: "/file/upload"
+                            imageUploadURL: "/file/upload",
+                            saveHTMLToTextarea : true
                         });
                     });
                 </script>
