@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.whoamizq.codebbs.codebbs.dto.PaginationDTO;
 import com.whoamizq.codebbs.codebbs.dto.QuestionDTO;
 import com.whoamizq.codebbs.codebbs.dto.QuestionQueryDTO;
+import com.whoamizq.codebbs.codebbs.enums.SortEnum;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeErrorCode;
 import com.whoamizq.codebbs.codebbs.exception.CustomizeException;
 import com.whoamizq.codebbs.codebbs.mapper.QuestionExtMapper;
@@ -43,6 +44,7 @@ public class QuestionService {
      */
     public PaginationDTO list(Integer page, Integer size,String search,
                               String tag,String sort) {
+        //实现搜索功能，去掉特殊字符
         if (StringUtils.isNotBlank(search)){
             String[] tags = StringUtils.split(search," ");
             search = Arrays
@@ -57,11 +59,26 @@ public class QuestionService {
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
         if (StringUtils.isNotBlank(tag)){
+            tag = tag.replace("+", "").replace("*", "").replace("?", "");
+            questionQueryDTO.setTag(tag);
+        }
+        //实现首页7天最热，30天最热以及消灭0回复等
+        for (SortEnum sortEnum : SortEnum.values()){
+            if (sortEnum.name().toLowerCase().equals(sort)){
+                questionQueryDTO.setSort(sort);
 
+                if (sortEnum == SortEnum.HOT7){
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7);
+                }
+                if (sortEnum == SortEnum.HOT30){
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30);
+                }
+                break;
+            }
         }
 
+//        查询首页条数
         Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
-
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
         } else {
@@ -74,7 +91,7 @@ public class QuestionService {
             page = totalPage;
         }
 
-
+        //实现首页列表
         paginationDTO.setPagination(totalPage, page);
         //size*(page-1)
         Integer offset = page < 1 ? 0 : size * (page - 1);

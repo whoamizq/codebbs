@@ -30,7 +30,7 @@ body{
     width: 38px;
     height: 38px;
     /*margin-right: 5px;*/
-    background-color: #00aaaa;
+    /*background-color: #00aaaa;*/
 }
 .media-body{
     padding: 10px;
@@ -57,7 +57,7 @@ body{
     padding-left: 0;
 }
 .question-wechat {
-    width: 80%;
+    width: 65%;
 }
 .codebbs-menu{
     color: #999;

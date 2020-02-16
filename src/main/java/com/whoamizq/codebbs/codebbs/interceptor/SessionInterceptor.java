@@ -5,6 +5,7 @@ import com.whoamizq.codebbs.codebbs.model.User;
 import com.whoamizq.codebbs.codebbs.model.UserExample;
 import com.whoamizq.codebbs.codebbs.service.NotificationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -20,6 +21,7 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Autowired
     private UserMapper userMapper;
 
+    @Value("${github.redirect.uri}")
     private String redirectUri;
 
     @Autowired
@@ -28,6 +30,9 @@ public class SessionInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
             throws Exception {
+        //设置context级别属性
+        request.getServletContext().setAttribute("redirectUri",redirectUri);
+
         Cookie[] cookies = request.getCookies();
         //访问首页时，查询是否有token，以此来判断展示个人信息
         if (cookies!=null && cookies.length!=0){

@@ -1,5 +1,6 @@
 package com.whoamizq.codebbs.codebbs.controller;
 
+import com.whoamizq.codebbs.codebbs.cache.HotTagCache;
 import com.whoamizq.codebbs.codebbs.dto.PaginationDTO;
 import com.whoamizq.codebbs.codebbs.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 
 @Controller
 public class IndexController {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private HotTagCache hotTagCache;
 
     @GetMapping("/")
     public String index(Model model,
@@ -23,9 +28,11 @@ public class IndexController {
                         @RequestParam(name = "tag",required = false) String tag,
                         @RequestParam(name = "sort",required = false) String sort){
         PaginationDTO pagination = questionService.list(page,size,search,tag,sort);
+        List<String> tags = hotTagCache.getHots();
         model.addAttribute("pagination",pagination);
         model.addAttribute("search",search);
         model.addAttribute("tag",tag);
+        model.addAttribute("tags",tags);
         model.addAttribute("sort",sort);
         return "index";
     }
