@@ -21,6 +21,9 @@ public class UserService {
             //进行插入
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
+            if (user.getName()==null){
+                user.setName("github默认用户");
+            }
             userMapper.insert(user);
         }else {
             //进行更新
@@ -28,7 +31,11 @@ public class UserService {
             User updateUser = new User();
             updateUser.setGmtModified(System.currentTimeMillis());
             updateUser.setAvatarUrl(user.getAvatarUrl());
-            updateUser.setName(user.getName());
+            if (user.getName()==null){
+                updateUser.setName("github默认用户");
+            }else {
+                updateUser.setName(user.getName());
+            }
             updateUser.setToken(user.getToken());
             UserExample example = new UserExample();
             example.createCriteria().andIdEqualTo(dbUser.getId());
