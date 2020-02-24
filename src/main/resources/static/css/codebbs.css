@@ -118,7 +118,7 @@ body{
     color: #999;
 }
 .menu .icon{
-    margin-right: 6px;
+    margin-right: 2px;
 }
 .menu .icon:hover {
     color: #499ef3;
@@ -126,6 +126,7 @@ body{
 .menu .comment-icon {
     font-size: 15px;
     cursor: pointer;
+    margin-right: 10px;
 }
 .menu .comment-icon :hover {
     color: #499ef3;
@@ -144,4 +145,7 @@ body{
 }
 .publish-codebbs{
     width: 90%;
+}
+.liked {
+    color: #499ef3;
 }

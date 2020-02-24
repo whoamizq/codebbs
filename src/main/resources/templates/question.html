@@ -70,7 +70,14 @@
                             </h5>
                             <div th:text="${comment.content}"></div>
                             <div class="menu">
-                                <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                                <!--点赞数-->
+                                <span th:data-id="${comment.id}"
+                                      onclick="like(this)" class="comment-icon"
+                                      th:classappend="${comment.status==1 ? 'liked' : ''}">
+                                    <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                                    <span th:text="${comment.likedCount}"></span>
+                                </span>
+                                <!--评论数-->
                                 <span th:data-id="${comment.id}"
                                       onclick="collapseComments(this)" class="comment-icon">
                                     <span class="glyphicon glyphicon-comment"></span>

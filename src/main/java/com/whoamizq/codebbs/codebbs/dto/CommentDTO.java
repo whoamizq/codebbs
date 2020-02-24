@@ -3,6 +3,9 @@ package com.whoamizq.codebbs.codebbs.dto;
 import com.whoamizq.codebbs.codebbs.model.User;
 import lombok.Data;
 
+/**
+ * 返回问题的所有评论
+ */
 @Data
 public class CommentDTO {
     private Long parentId;
@@ -15,4 +18,6 @@ public class CommentDTO {
     private Integer commentCount;
     private String content;
     private User user;
+    private Integer status;
+    private Integer likedCount=0;
 }

@@ -13,6 +13,12 @@ import org.springframework.stereotype.Component;
 
 import java.util.*;
 
+/**
+ * 利用定时任务查看热门标签
+ * 查询所有问题获取每个问题的标签
+ * 标签名作为key,包含这个标签的问题数字及评论数按比例加入map中
+ * map实现Comparable接口用于排序放入list中
+ */
 @Component
 @Slf4j
 public class HotTagTasks {

@@ -1,5 +1,5 @@
-# whoami代码论坛(码谈)
-## 资料
+# [whoami代码论坛(码谈)](http://106.52.166.52)
+### 资料
 [Spring 文档](https://spring.io/guides)    
 [Spring Web](https://spring.io/guides/gs/serving-web-content/)  
 [github官网](https://github.com/)    
@@ -26,6 +26,7 @@
 
 ##### 开发日志  
 1. 2020/02/15 完成上线部署    
-2. 2020/02/18 完善首页页面    
-3. 2020/02/20 完善登录用户名为null的情况
-4. ......
+1. 2020/02/18 完善首页页面    
+1. 2020/02/20 完善登录用户名为null的情况
+1. 2020/02/24 完成使用Redis实现点赞功能
+1. ......

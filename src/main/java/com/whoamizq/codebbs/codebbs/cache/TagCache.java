@@ -8,6 +8,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * 标签库
+ * 可以存入Redis数据库
+ * 暂未实现。。。
+ */
 public class TagCache {
     public static List<TagDTO> get(){
         List<TagDTO> tagDTOS = new ArrayList<>();
@@ -21,15 +26,15 @@ public class TagCache {
 
         TagDTO framework = new TagDTO();
         framework.setCategoryName("平台框架");
-        framework.setTags(Arrays.asList("laravel", "spring", "express", "django", "flask",
-                "yii", "ruby-on-rails", "tornado", "koa", "struts","spring","springboot",
-                "mybatis","vue","springmvc","shiro"));
+        framework.setTags(Arrays.asList("spring", "springboot","bootstrap","laravel",
+                "struts", "django", "flask","mybatis","vue","springmvc","shiro",
+                "yii", "ruby-on-rails", "tornado", "koa", "express","solr"));
         tagDTOS.add(framework);
 
         TagDTO server = new TagDTO();
         server.setCategoryName("服务器");
         server.setTags(Arrays.asList("linux", "nginx", "docker", "apache", "ubuntu", "centos",
-                "缓存 tomcat", "负载均衡", "unix", "hadoop", "windows-server"));
+                "缓存 tomcat", "负载均衡", "unix", "hadoop", "windows-server","zookeeper"));
         tagDTOS.add(server);
 
         TagDTO db = new TagDTO();
@@ -41,8 +46,8 @@ public class TagCache {
         TagDTO tool = new TagDTO();
         tool.setCategoryName("开发工具");
         tool.setTags(Arrays.asList("git", "github", "visual-studio-code", "vim", "sublime-text",
-                "xcode intellij-idea", "eclipse", "maven", "ide", "svn", "visual-studio",
-                "atom emacs", "textmate", "hg","idea"));
+                "intellij-idea", "eclipse", "maven", "ide", "svn", "visual-studio",
+                "atom emacs", "textmate", "hg","微信开发者工具","PyCharm"));
         tagDTOS.add(tool);
         return tagDTOS;
     }

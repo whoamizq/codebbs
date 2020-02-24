@@ -50,6 +50,39 @@ function comment(e) {
 }
 
 /**
+ * 点赞请求
+ * @param obj
+ */
+function like(obj) {
+    var likeUserId = obj.getAttribute("data-id");
+    var flag = $(obj).hasClass("liked");
+    var liked_count=Number($(obj).find('find').eq(1).text());
+    if(!flag){
+        //点赞  +1
+        $.ajax({
+            type : "GET",
+            url : "/like/" + likeUserId,
+            success : function (msg) {
+                console.log(msg);
+                $(obj).addClass("liked");
+                $(obj).find('span').eq(1).text(liked_count+1);
+            }
+        })
+    }else {
+        //取消点赞 -1
+        $.ajax({
+            type : "GET",
+            url : "/unlike/" + likeUserId,
+            success : function (msg) {
+                console.log(msg);
+                $(obj).removeClass("liked");
+                $(obj).find('span').eq(1).text(liked_count)
+            }
+        })
+    }
+}
+
+/**
  * 展开二级评论
  */
 function collapseComments(e) {

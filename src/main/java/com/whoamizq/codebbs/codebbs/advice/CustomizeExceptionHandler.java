@@ -15,6 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+ * 接受所有错误异常并展示错误信息
+ */
 @ControllerAdvice
 @Slf4j
 public class CustomizeExceptionHandler {
