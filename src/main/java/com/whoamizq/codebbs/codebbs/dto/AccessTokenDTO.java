@@ -10,5 +10,4 @@ public class AccessTokenDTO {
     private String redirect_uri;
     private String state;
 
-
 }

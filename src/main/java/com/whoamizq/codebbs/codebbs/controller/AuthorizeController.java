@@ -37,13 +37,13 @@ public class AuthorizeController {
     private UserService userService;
 
     @GetMapping("/callback")
-    public String callback(@RequestParam(name = "code") String code,
+    public String callback(@RequestParam(name = "code") String githubCode,
                            @RequestParam(name = "state") String state,
                            HttpServletResponse response){
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(clientSecret);
-        accessTokenDTO.setCode(code);
+        accessTokenDTO.setCode(githubCode);
         accessTokenDTO.setRedirect_uri(redirectUri);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
