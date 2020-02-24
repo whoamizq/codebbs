@@ -54,14 +54,14 @@ function comment(e) {
  * @param obj
  */
 function like(obj) {
-    var likeUserId = obj.getAttribute("data-id");
+    var likedUserId = obj.getAttribute("data-id");
     var flag = $(obj).hasClass("liked");
     var liked_count=Number($(obj).find('find').eq(1).text());
     if(!flag){
         //点赞  +1
         $.ajax({
             type : "GET",
-            url : "/like/" + likeUserId,
+            url : "/like/" + likedUserId,
             success : function (msg) {
                 console.log(msg);
                 $(obj).addClass("liked");
@@ -72,7 +72,7 @@ function like(obj) {
         //取消点赞 -1
         $.ajax({
             type : "GET",
-            url : "/unlike/" + likeUserId,
+            url : "/unlike/" + likedUserId,
             success : function (msg) {
                 console.log(msg);
                 $(obj).removeClass("liked");
