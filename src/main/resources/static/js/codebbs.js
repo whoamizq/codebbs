@@ -56,7 +56,8 @@ function comment(e) {
 function like(obj) {
     var likedUserId = obj.getAttribute("data-id");
     var flag = $(obj).hasClass("liked");
-    var liked_count=Number($(obj).find('find').eq(1).text());
+    var liked_count=Number($(obj).find('span').eq(1).text());
+    console.log(liked_count);
     if(!flag){
         //点赞  +1
         $.ajax({
@@ -76,7 +77,7 @@ function like(obj) {
             success : function (msg) {
                 console.log(msg);
                 $(obj).removeClass("liked");
-                $(obj).find('span').eq(1).text(liked_count)
+                $(obj).find('span').eq(1).text(liked_count-1)
             }
         })
     }

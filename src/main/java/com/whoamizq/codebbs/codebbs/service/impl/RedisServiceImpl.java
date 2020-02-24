@@ -1,5 +1,6 @@
 package com.whoamizq.codebbs.codebbs.service.impl;
 
+import com.whoamizq.codebbs.codebbs.dto.LikedCountDTO;
 import com.whoamizq.codebbs.codebbs.entity.UserLike;
 import com.whoamizq.codebbs.codebbs.enums.LikedStatusEnum;
 import com.whoamizq.codebbs.codebbs.service.RedisService;
@@ -74,5 +75,28 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public Integer getLikedCount(String likedUserId) {
         return (Integer) redisTemplate.opsForHash().get(RedisKeyUtil.MAP_KEY_USER_LIKED_COUNT, likedUserId);
+    }
+    //获取Redis中存储的所有点赞数量
+    @Override
+    public List<LikedCountDTO> getLikedCountFromRedis() {
+        Cursor<Map.Entry<Object, Object>> cursor = redisTemplate.opsForHash()
+                .scan(RedisKeyUtil.MAP_KEY_USER_LIKED_COUNT, ScanOptions.NONE);
+        List<LikedCountDTO> list = new ArrayList<>();
+        while (cursor.hasNext()){
+            Map.Entry<Object, Object> map = cursor.next();
+            //将点赞数量存储在 LikedCountDT
+            String key = (String)map.getKey();
+            LikedCountDTO dto = new LikedCountDTO(key, (Integer) map.getValue());
+            list.add(dto);
+            //从Redis中删除这条记录
+            //redisTemplate.opsForHash().delete(RedisKeyUtils.MAP_KEY_USER_LIKED_COUNT, key);
+        }
+        return list;
+    }
+    //删除数据
+    @Override
+    public void deleteLikedFromRedis(String likedUserId, String likedPostId) {
+        String key = RedisKeyUtil.getLikedKey(likedUserId, likedPostId);
+        redisTemplate.opsForHash().delete(RedisKeyUtil.MAP_KEY_USER_LIKED, key);
     }
 }

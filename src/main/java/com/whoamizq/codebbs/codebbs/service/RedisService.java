@@ -1,5 +1,6 @@
 package com.whoamizq.codebbs.codebbs.service;
 
+import com.whoamizq.codebbs.codebbs.dto.LikedCountDTO;
 import com.whoamizq.codebbs.codebbs.entity.UserLike;
 
 import java.util.List;
@@ -45,4 +46,15 @@ public interface RedisService {
      * @return
      */
     Integer getLikedCount(String likedUserId);
+    /**
+     * 获取Redis中存储的所有点赞数量
+     * @return
+     */
+    List<LikedCountDTO> getLikedCountFromRedis();
+    /**
+     * 从Redis中删除一条点赞数据
+     * @param likedUserId 被点赞者
+     * @param likedPostId 点赞发起人
+     */
+    void deleteLikedFromRedis(String likedUserId,String likedPostId);
 }
