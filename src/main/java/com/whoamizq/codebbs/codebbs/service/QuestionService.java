@@ -174,6 +174,10 @@ public class QuestionService {
         return questionDTO;
     }
 
+    /**
+     * 创建问题或更新
+     * @param question
+     */
     public void createOrUpdate(Question question) {
         if (question.getId() == null){
             //创建
@@ -200,6 +204,10 @@ public class QuestionService {
         }
     }
 
+    /**
+     * 根据id查询到问题，对问题的浏览数+1
+     * @param id
+     */
     public void incview(Long id) {
         Question question = new Question();
         question.setId(id);
@@ -207,6 +215,11 @@ public class QuestionService {
         questionExtMapper.incView(question);
     }
 
+    /**
+     * 根据传入标签,并查找与该标签相关的返回
+     * @param queryDTO
+     * @return
+     */
     public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
         if (StringUtils.isBlank(queryDTO.getTag())){
             return new ArrayList<>();

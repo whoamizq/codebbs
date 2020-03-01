@@ -4,7 +4,7 @@
 [Spring 文档](https://spring.io/guides)    
 [Spring Web](https://spring.io/guides/gs/serving-web-content/)  
 [菜鸟教程](https://www.runoob.com/mysql/mysql-insert-query.html)    
-[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)    
+
 [Spring Dev Tool](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#using-boot-devtools)  
 [Spring MVC官网](https://docs.spring.io/spring/docs/5.0.3.RELEASE/spring-framework-reference/web.html#mvc-handlermapping-interceptor)  
  
@@ -25,6 +25,7 @@
     + 根据官方文档使用相应的组件
     + [BootStrap](https://v3.bootcss.com/components/)     
     + [栅格系统](https://v3.bootcss.com/css/#grid)
+
 #### 登录功能模块
 [github官网](https://github.com/)     
 [github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
@@ -58,9 +59,46 @@
    ```
    注：该方法即将弃用，后续更新使用方法
 1. 最后返回github用户参数，存入数据库，更新登录状态。
-### 发布问题
-1. 前提条件：已登录用户
-### 首页分页展示
+
+### 论坛发布、修改、分页展示模块
+1. 前提条件：已登录用户。
+1. 将问题信息封装成QuestionDTO，并添加Lombok支持，减少代码getter/setter等方法的编写。
+    ``` java
+   @Data
+   public class QuestionDTO {
+       private Long id;
+       private String title;
+       private String description;
+       ......
+   }
+    ```
+1. 发布问题之前的校验
+    ``` java
+    //校验输入是否为空
+    if (title == null || title.equals("")) {
+        model.addAttribute("error","标题不能为空");
+        return "publish";
+    } 
+   //其他校验
+   ......
+   ```
+1. 使用thymeleaf+Bootstrap+Jquery解析数据解析美化发布问题页面
+    + [Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#setting-attribute-values)    
+    + [JQuery](https://www.runoob.com/jquery/jquery-tutorial.html)
+1. 实现我的问题列表以及首页分页展示示例
+    + 使用mybatis-generator自动生成代码的插件实现分页等多种功能
+    ``` java
+   QuestionExample example = new QuestionExample();
+           example.createCriteria()
+                   .andCreatorEqualTo(userId);
+           example.setOrderByClause("gmt_create desc");
+           List<Question> questions = questionMapper.selectByExampleWithRowbounds(example, new RowBounds(offset, size)); 
+   ```
+    + [插件github地址](https://github.com/mybatis/generator)  
+    + [使用教程](https://blog.csdn.net/testcs_dn/article/details/77881776)
+
+### 多级回复、浏览数及评论点赞功能
+
 ### ......
 
 
