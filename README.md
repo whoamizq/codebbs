@@ -98,7 +98,95 @@
     + [使用教程](https://blog.csdn.net/testcs_dn/article/details/77881776)
 
 ### 多级回复、浏览数及评论点赞功能
+1. 数据表设计采用单表设计
+    + 通过type属性指定评论为问题评论还是评论回复
+    + 通过parent_id在单表中指定级联关系
+1. 问题显示页面
+    + 首次进入问题页面应保证效率,仅展示一级评论,即问题的回复
+    + 每条评论显示有点赞数及评论数,用户可点击评论查看二级评论,并显示出二级评论窗口
+1. 每访问一次问题详情页浏览数+1
+    ``` java
+   /**
+    * 根据id查询到问题，对问题的浏览数+1
+    * @param id
+    */
+    public void incview(Long id) {
+        Question question = new Question();
+        question.setId(id);
+        question.setViewCount(1);
+        questionExtMapper.incView(question);
+    } 
+   ```
+1. 将点赞数量保存至Redis数据库中
+    ``` java
+    //被点赞数+1
+    @Override
+    public void incrementLikedCount(String likedUserId) {
+        redisTemplate.opsForHash().increment(RedisKeyUtil.MAP_KEY_USER_LIKED_COUNT,likedUserId,1);
+    } 
+   ```
 
+### Tag标签库完善
+1. 将所有标签封装成TagCache
+2. 不允许提交问题时输入非法标签
+    ``` java
+   //校验标签的合法性
+    String invalid = TagCache.filterInvalid(tag);
+    if (StringUtils.isNotBlank(invalid)){
+        model.addAttribute("error","输入非法标签"+invalid);
+        return "publish";
+    }
+    ```
+3. 焦点移动到标签时，弹出选择标签，用户选择符合自己的标签进行添加
+4. 标签与标签之间用逗号分隔
+
+### 通知回复功能模块
+1. createNotify(创建通知)
+    + 每当有一次评论请求成功时,同时创建一条通知,保存parent_id问题的id,设置状态为未读,在通知页面显示评论内容及评论人
+    + 使用Spring事务进行管理,保证评论与通知的原子性
+    ``` java
+   @Transactional
+    public void  insert(Comment comment, User commentator){
+   //创建通知
+   createNotify(......);
+   }
+   private void createNotify(Comment comment, ......) { 
+   ......
+   }
+   ```
+1. 评论数增加
+1. 通知条数及内容展示
+    + 使用拦截器查询当前用户在数据库中通知的未读条数,放入Session中
+    + 用户请求通知列表，展示所有被评论的信息
+    + 用户点击某条通知时，根据parent_id,
+    转发请求到question页面并将该通知状态置为已读
+
+### 集成Markdown富文本编辑器
+1. 开源在线Markdown编辑器
+    + [Markdown](https://pandao.github.io/editor.md/)
+1. 引入使用编辑器的基本样式及必须资源
+1. 示例：
+``` html
+<script type="text/javascript">
+    $(function () {
+        var editor = editormd("question-editor", {
+            width: "100%",
+            height: 350,
+            path: "/js/lib/",
+            delay: 0,
+            syncScrolling : "single",
+            placeholder: "请输入问题描述",
+            imageUpload: true,
+            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+            imageUploadURL: "/file/upload",
+            saveHTMLToTextarea : true
+        });
+    });
+</script>
+```
+### 7天最热话题&点赞关系存储
+1. 引入定时任务
+1. 定时查询和存储Redis数据
 ### ......
 
 
